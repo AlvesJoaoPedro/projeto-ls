@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>To-Do List</title>
+</head>
+<body>
+  <div class="notebook">
+    <!-- Imagem com mapa -->
+    <img src="imgs/cadernoteste.png" alt="Caderno de couro" usemap="#notebookMap">
+    <!-- Definição do mapa -->
+    <map name="notebookMap">
+      <!-- Área clicável na trava do caderno -->
+      <area shape="circle" coords="260,30,15" href="#" alt="Abrir caderno" id="openNotebook">
+    </map>
+  </div>
+
+  <script type="module">
+    // Tratamento de eventos no clique
+    const area = document.getElementById('openNotebook');
+    area.addEventListener('click', (event) => {
+      event.preventDefault(); // Evita a navegação padrão do link
+      alert('Abrindo o caderno...'); // Substituir por lógica dinâmica
+    });
+  </script>
+</body>
+</html>
