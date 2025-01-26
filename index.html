@@ -8,22 +8,12 @@
 </head>
 <body>
   <div class="notebook">
-    <!-- Imagem com mapa -->
-    <img src="imgs/caderno-proj-ls.jpg" alt="Caderno de couro" usemap="#notebookMap">
-    <!-- Definição do mapa -->
-    <map name="notebookMap">
-      <!-- Área clicável na trava do caderno -->
-      <area shape="circle" coords="1440, 30,15" href="#" alt="Abrir caderno" id="openNotebook">
-    </map>
+    <!-- Imagem com caderno -->
+    <img src="imgs/caderno-proj-ls.jpg" alt="Caderno de couro" id="notebook-img">
+    <!-- Botão fixo na trava do caderno -->
+    <button id="openNotebook" class="notebook-btn">Abrir caderno</button>
   </div>
 
-  <script type="module">
-    // Tratamento de eventos no clique
-    const area = document.getElementById('openNotebook');
-    area.addEventListener('click', (event) => {
-      event.preventDefault(); // Evita a navegação padrão do link
-      alert('Abrindo o caderno...'); // Substituir por lógica dinâmica
-    });
-  </script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>

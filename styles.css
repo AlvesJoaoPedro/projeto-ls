@@ -8,7 +8,6 @@ body {
     font-family: Arial, sans-serif;
     overflow: hidden; /* Remove barras de rolagem */
   }
-
   
   .notebook {
     position: relative;
@@ -17,8 +16,27 @@ body {
   .notebook img {
     max-width: 80vw; /* Limita a largura a 80% da viewport */
     max-height: 90vh; /* Limita a altura a 90% da viewport */
-    width: auto; /* Mantém proporção ao limitar a altura */
-    height: auto; /* Mantém proporção ao limitar a largura */
+    width: auto;
+    height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   }
+  
+  .notebook-btn {
+    position: absolute;
+    top: 55%;  /* Distância do topo da imagem */
+    left: 85%; /* Distância da esquerda da imagem */
+    transform: translate(-50%, -50%); /* Centraliza o botão com base no ponto de origem */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .notebook-btn:hover {
+    background-color: darkred;
+  }
+  
