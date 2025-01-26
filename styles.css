@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f1e9; /* Bege claro */
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Remove barras de rolagem */
+  }
+
+  
+  .notebook {
+    position: relative;
+  }
+  
+  .notebook img {
+    max-width: 80vw; /* Limita a largura a 80% da viewport */
+    max-height: 90vh; /* Limita a altura a 90% da viewport */
+    width: auto; /* Mantém proporção ao limitar a altura */
+    height: auto; /* Mantém proporção ao limitar a largura */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
