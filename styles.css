@@ -1,46 +1,218 @@
 body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f1e9; /* Bege claro */
-    font-family: Arial, sans-serif;
-    overflow: hidden; /* Remove barras de rolagem */
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f1e9; /* Bege claro */
+  font-family: Arial, sans-serif;
+  overflow: hidden; /* Remove barras de rolagem */
+}
+
+.notebook {
+  opacity: 1;
+  position: relative;
+  transition: transform 0.6s ease, opacity 0.3s ease;
+}
+
+/* Estilos para caderno fechado */
+/* Caderno fechado */
+.notebook-closed {
+  transform: rotateY(0);
+  opacity: 1;
+  transition: transform 0.3s ease, opacity 0.2s ease; /* Acelerei o tempo de transição */
+  transform-origin: left;
+  position: relative;
+  filter: blur(0); /* Sem blur quando fechado */
+}
+
+/* Caderno aberto */
+.notebook-opened {
+  display: flex;
+  justify-content: space-between;
+  width: 90vw; /* Ocupa 90% da largura da viewport */
+  max-width: 1200px;
+  height: 90vh; /* Ocupa 90% da altura da viewport */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  opacity: 0.8;
+  animation: closeNotebook 0.3s ease-in-out forwards; /* Acelerei a animação */
+  filter: blur(0); /* Garantir que o blur é removido após a animação */
+}
+
+/* Animação de abertura do caderno */
+@keyframes openNotebook {
+  from {
+    transform: rotateY(0);
+    opacity: 1;
+    filter: blur(3px); /* Aplica blur durante a animação */
   }
-  
-  .notebook {
-    position: relative;
+  to {
+    transform: rotateY(-180deg);
+    opacity: 0.8;
+    filter: blur(0); /* Remove o blur ao final */
   }
-  
-  .notebook img {
-    max-width: 80vw; /* Limita a largura a 80% da viewport */
-    max-height: 90vh; /* Limita a altura a 90% da viewport */
-    width: auto;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Animação de fechamento do caderno */
+@keyframes closeNotebook {
+  from {
+    transform: rotateY(-180deg);
+    opacity: 0.8;
+    filter: blur(3px); /* Aplica blur durante a animação */
   }
-  
-  .notebook-btn {
-    width: 80px;
-    height: 80px;
-    position: absolute;
-    top: 55%;  /* Distância do topo da imagem */
-    left: 84.8%; /* Distância da esquerda da imagem */
-    transform: translate(-50%, -50%); /* Centraliza o botão com base no ponto de origem */
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #C79800;
-    color: white;
-    border: 1px solid #886902;
-    border-radius: 50%;
-    cursor: pointer;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-style: bold;
+  to {
+    transform: rotateY(0);
+    opacity: 1;
+    filter: blur(0); /* Remove o blur ao final */
   }
-  
-  .notebook-btn:hover {
-    background-color: #a78002;
-  }
-  
+}
+
+
+/* Imagem do caderno */
+.notebook img {
+  max-width: 80vw; /* Limita a largura a 80% da viewport */
+  max-height: 90vh; /* Limita a altura a 90% da viewport */
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Botão do caderno */
+.notebook-btn {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 55%;  /* Distância do topo da imagem */
+  left: 84.8%; /* Distância da esquerda da imagem */
+  transform: translate(-50%, -50%); /* Centraliza o botão com base no ponto de origem */
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #C79800;
+  color: white;
+  border: 1px solid #886902;
+  border-radius: 50%;
+  cursor: pointer;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-style: bold;
+}
+
+.notebook-btn:hover {
+  background-color: #a78002;
+}
+
+/* Capas do caderno */
+.cover {
+  width: 3%;
+  background-color: #2E1A00; /* Cor da capa #452800*/
+}
+
+/* Folhas do caderno */
+.pages {
+  flex: 1; /* Preenche o espaço restante entre as capas */
+  background-color: #fdfdf5; /* Cor próxima ao branco para as folhas */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Necessário para posicionar a linha de dobra e os elementos dentro */
+}
+
+/* Conteúdo das páginas */
+.page-content {
+  padding: 10px;
+  text-align: center;
+  position: relative; /* Referência para os elementos filhos */
+}
+
+/* Div que envolve a caixa de texto e o botão */
+.task-input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute; /* Agora é absoluto, para se posicionar no topo e à esquerda */
+  bottom: 33vh; /* Distância do topo */
+  right: 15vh; /* Distância da esquerda */
+}
+
+/* Caixa de texto */
+#task-input {
+  padding: 10px;
+  font-size: 16px;
+  width: 250px;
+  margin-right: 10px; /* Espaço entre a caixa de texto e o botão */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Botão de adicionar */
+#add-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#add-button:hover {
+  background-color: #45a049; /* Efeito hover no botão */
+}
+
+/* Linha no centro (dobra do caderno) */
+.center-fold {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 3px; /* Espessura da linha */
+  height: 100%;
+  background-color: #d3d3d3; /* Cor suave para a dobra */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Sombras para o efeito de dobra */
+  transform: translateX(-50%); /* Centraliza a linha */
+}
+
+#task-list-container {
+  position: absolute;
+  left: 300%;
+  top: -1670%;
+  width: 23vw; /* Largura adequada */
+  height: 74vh; /* Altura proporcional ao caderno */
+  overflow-y: auto; /* Permite rolagem vertical */
+  padding: 10px;
+  background-color: #fdfdf5;
+  border-radius: 8px;
+}
+
+
+#task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#task-list li {
+  position: relative;
+  padding: 8px 10px;
+  margin-bottom: 4px #ccc; /* Espaço entre linhas */
+  background-color: #fdfdf5;
+  border-bottom: 1px solid #d9d9d9; /* Linha simulando papel */
+  font-family: 'Courier New', Courier, monospace; /* Fonte estilo caderno */
+}
+
+#task-list li:last-child {
+  border-bottom: none; /* Remove a linha do último item */
+}
+
+#task-list li button {
+  background: none;
+  border: none;
+  color: #d9534f;
+  cursor: pointer;
+  font-size: 14px;
+  position: absolute;
+  right: 10px; /* Alinha o botão à direita */
+  top: 50%;
+  transform: translateY(-50%);
+}
