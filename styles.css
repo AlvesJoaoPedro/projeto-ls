@@ -23,20 +23,24 @@ body {
   }
   
   .notebook-btn {
+    width: 80px;
+    height: 80px;
     position: absolute;
     top: 55%;  /* Distância do topo da imagem */
-    left: 85%; /* Distância da esquerda da imagem */
+    left: 84.8%; /* Distância da esquerda da imagem */
     transform: translate(-50%, -50%); /* Centraliza o botão com base no ponto de origem */
     padding: 10px 20px;
     font-size: 16px;
-    background-color: red;
+    background-color: #C79800;
     color: white;
-    border: none;
-    border-radius: 10px;
+    border: 1px solid #886902;
+    border-radius: 50%;
     cursor: pointer;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: bold;
   }
   
   .notebook-btn:hover {
-    background-color: darkred;
+    background-color: #a78002;
   }
   
