@@ -3,6 +3,7 @@ let notebook = document.querySelector('.notebook');
 //botão que abre o caderno
 let openButton = document.querySelector("#openNotebook");
 
+//CARREGA AS TAREFAS SALVAS NO LOCALSTORAGE
 document.addEventListener('DOMContentLoaded', () => {
   let taskInput = document.querySelector('#task-input');
   let addButton = document.querySelector('#add-button');
@@ -27,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+
 // Função para salvar tarefas no LocalStorage
 function saveTaskToLocalStorage(task) {
   let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -42,23 +44,72 @@ function loadTasksFromLocalStorage() {
   });
 }
 
+function saveCompletedTaskToLocalStorage(task) {
+  let completedTasks = JSON.parse(localStorage.getItem('completed-tasks')) || [];
+  completedTasks.push(task);
+  localStorage.setItem('completed-tasks', JSON.stringify(completedTasks));
+}
+
+function saveDeletedTaskToLocalStorage(task) {
+  let deletedTasks = JSON.parse(localStorage.getItem('deleted-tasks')) || [];
+  deletedTasks.push(task);
+  localStorage.setItem('deleted-tasks', JSON.stringify(deletedTasks));
+}
+
+function loadCompletedTasksFromLocalStorage()
+{
+  let completedTasks = JSON.parse(localStorage.getItem('completed-tasks')) || [];
+
+}
+
 // Função para criar e exibir um item da lista
 function createTaskElement(taskText) {
-  let taskList = document.querySelector('#task-list'); //<UL>
-  let listItem = document.createElement('li');//<li>
+  let taskList = document.querySelector('#task-list');
+  let listItem = document.createElement('li');
   listItem.textContent = taskText;
+
+  // Criação do contêiner para os botões
+  let buttonContainer = document.createElement('div');
+  buttonContainer.classList.add('button-container');
 
   // Botão de exclusão
   let deleteButton = document.createElement('button');
   deleteButton.textContent = 'X';
+  deleteButton.classList.add('delete-btn');
   deleteButton.addEventListener('click', () => {
     taskList.removeChild(listItem);
-    removeTaskFromLocalStorage(taskText); // Remove do LocalStorage
+    removeTaskFromLocalStorage(taskText);
+    saveDeletedTaskToLocalStorage(taskText);
   });
 
-  listItem.appendChild(deleteButton);
+    // Botão de concluir
+    let completeButton = document.createElement('button');
+    completeButton.textContent = '✓';
+    completeButton.classList.add('complete-btn');
+    completeButton.addEventListener('click',
+      () =>
+      {
+      listItem.classList.add('completed-tasks');
+  
+      // Desabilita os botões
+      completeButton.disabled = true;
+      deleteButton.disabled = true;
+  
+      // Salva a tarefa como concluída no LocalStorage
+      saveCompletedTaskToLocalStorage(taskText);
+    });
+
+  // Adiciona os botões ao contêiner
+  buttonContainer.appendChild(deleteButton);
+  buttonContainer.appendChild(completeButton);
+
+  // Adiciona o contêiner de botões ao item da lista
+  listItem.appendChild(buttonContainer);
+
+  // Adiciona o item da lista à lista de tarefas
   taskList.appendChild(listItem);
 }
+
 
 // Função para remover tarefas do LocalStorage
 function removeTaskFromLocalStorage(taskToRemove) {
@@ -86,3 +137,19 @@ function abrirCaderno() {
   window.location.href = 'cadernoaberto.html';
 }
 
+completedTasks = JSON.parse(localStorage.getItem('completed-tasks')) || []
+completeButton.addEventListener('click',
+  () =>
+  {
+    completedTasks.push(taskText);
+    listItem.classList.add('completed-tasks');
+
+    // Atualiza o LocalStorage com as tarefas concluídas
+    localStorage.setItem('completed-tasks', JSON.stringify(completedTasks))
+  })
+
+
+function goToNextPage()
+{
+  window.location.href = 'completedtasks.html';
+}

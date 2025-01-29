@@ -192,27 +192,109 @@ body {
   margin: 0;
 }
 
-#task-list li {
-  position: relative;
-  padding: 8px 10px;
-  margin-bottom: 4px #ccc; /* Espaço entre linhas */
-  background-color: #fdfdf5;
-  border-bottom: 1px solid #d9d9d9; /* Linha simulando papel */
-  font-family: 'Courier New', Courier, monospace; /* Fonte estilo caderno */
+li {
+  display: flex;
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: space-between; /* Separa o texto dos botões */
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
 }
 
-#task-list li:last-child {
-  border-bottom: none; /* Remove a linha do último item */
+/* Botões alinhados à direita */
+.button-container {
+  display: flex; /* Utiliza flexbox para alinhar os itens */
+  justify-content: flex-end; /* Alinha os botões à extrema direita */
+  gap: 10px; /* Espaço entre os botões */
 }
 
-#task-list li button {
-  background: none;
+/* Estilo dos botões */
+.complete-btn {
+  background-color: #4caf50;
+  color: white;
   border: none;
-  color: #d9534f;
+  padding: 5px 10px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Efeito hover */
+.complete-btn:hover {
+  background-color: #45a049;
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Estilo para as tarefas concluídas */
+.completed-tasks {
+  text-decoration: line-through;  /* Riscado no texto */
+  color: gray;  /* Deixa a tarefa com uma cor mais suave, como cinza */
+  opacity: 0.6;  /* Diminui um pouco a opacidade para dar um efeito visual de concluído */
+}
+
+/* Estilo para desabilitar os botões */
+button:disabled {
+  background-color: lightgray;  /* Muda a cor de fundo quando desabilitado */
+  color: darkgray;  /* Muda a cor do texto quando desabilitado */
+  cursor: not-allowed;  /* Muda o cursor para indicar que o botão não é clicável */
+}
+
+#back-to-notebook {
   position: absolute;
-  right: 10px; /* Alinha o botão à direita */
-  top: 50%;
-  transform: translateY(-50%);
+  left: 14.5%;  /* Posiciona o botão na borda esquerda */
+  top: 53%;  /* Alinha o botão ao centro vertical do caderno */
+  background-color: rgba(192, 192, 192, 0.5); /* Cinza transparente */
+  color: white; /* Cor da seta */
+  border: 2px solid rgba(128, 128, 128, 0.8); /* Borda cinza mais escura */
+  border-radius: 12px; /* Bordas arredondadas */
+  width: 80px; /* Largura do botão */
+  height: 80px; /* Altura do botão */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px; /* Tamanho da seta aumentada */
+  font-weight: bolder; /* Deixa a seta mais larga */
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+#back-to-notebook:hover {
+  background-color: rgba(128, 128, 128, 0.8); /* Fica mais opaco ao passar o mouse */
+  border-color: rgba(96, 96, 96, 1); /* Borda mais escura ao passar o mouse */
+}
+
+#next-page-button {
+  position: absolute;
+  top: 50%; /* Centralizado verticalmente */
+  left: calc(85% - 40px); /* Centraliza horizontalmente com base na largura do botão */
+  background-color: rgba(192, 192, 192, 0.5); /* Cinza transparente */
+  color: white; /* Cor da seta */
+  border: 2px solid rgba(128, 128, 128, 0.8); /* Borda cinza mais escura */
+  border-radius: 12px; /* Bordas arredondadas */
+  width: 80px; /* Largura do botão */
+  height: 80px; /* Altura do botão */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px; /* Tamanho da seta aumentada */
+  font-weight: bold; /* Deixa a seta mais larga */
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+#next-page-button:hover {
+  background-color: rgba(128, 128, 128, 0.8); /* Fica mais opaco ao passar o mouse */
+  border-color: rgba(96, 96, 96, 1); /* Borda mais escura ao passar o mouse */
 }

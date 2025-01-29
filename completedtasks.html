@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles-open.css">
+  <title>Tarefas Concluídas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Botão de voltar para o caderno, posicionado no canto esquerdo -->
+    <button id="back-to-notebook" class="notebook-btn" onclick="window.location.href='cadernoaberto.html'">&#8592;</button>
+
+    <div class="notebook notebook-opened">
+    <div class="cover"></div>
+    <div class="pages">
+      <div class="page-content">
+        <!--Container lista de tarefas concluídas-->
+        <div id="task-list-container">
+          <ul id="completed-tasks-list"></ul>
+        </div>
+      </div>
+      <div class="center-fold"></div> <!-- Linha de dobra -->
+    </div>
+    <div class="cover"></div>
+    </div>
+
+    <button id="next-page-button" onclick="window.location.href = 'deletedtasks.html'">&#10145;</button>
+
+    <script src="js/completedtasks.js" defer></script>
+</body>
+</html>

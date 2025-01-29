@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles-open.css">
-  <title>Caderno Aberto</title>
+  <title>Tarefas Deletadas</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,22 +12,19 @@
     <div class="cover"></div>
     <div class="pages">
       <div class="page-content">
-        <!-- Caixa de texto e botão para adicionar tarefa -->
-        <div class="task-input-container">
-          <input type="text" id="task-input" placeholder="Adicionar tarefa">
-          <button id="add-button">Adicionar</button>
-        </div>
-        <!--Container lista de tarefas-->
+        <!-- Container lista de tarefas deletadas -->
         <div id="task-list-container">
-          <ul id="task-list"></ul>
+          <ul id="deleted-tasks-list"></ul>
         </div>
       </div>
       <div class="center-fold"></div> <!-- Linha de dobra -->
     </div>
     <div class="cover"></div>
   </div>
-  <!-- Botão de passar para a próxima página -->
-  <button id="next-page-button" onclick="goToNextPage()">&#10145;</button>
-  <script src="js/main.js" defer></script>
+
+  <!-- Botão de Voltar, posicionado no lado esquerdo e centralizado no caderno -->
+  <button id="back-to-notebook" class="notebook-btn" onclick="window.location.href='completedtasks.html'">&#8592;</button>
+
+  <script src="js/deletedtasks.js" defer></script>
 </body>
 </html>
