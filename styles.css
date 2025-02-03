@@ -176,14 +176,23 @@ body {
 #task-list-container {
   position: absolute;
   left: 300%;
-  top: -1670%;
+  top: -1660%;
   width: 23vw; /* Largura adequada */
-  height: 74vh; /* Altura proporcional ao caderno */
+  height: 60vh; /* Altura proporcional ao caderno */
   overflow-y: auto; /* Permite rolagem vertical */
   padding: 10px;
   background-color: #fdfdf5;
   border-radius: 8px;
+  padding-top: 0;
 }
+
+#task-list-container h2
+{
+  margin: 0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: #504f4f;
+}
+
 
 
 #task-list {
@@ -240,13 +249,6 @@ li {
   text-decoration: line-through;  /* Riscado no texto */
   color: gray;  /* Deixa a tarefa com uma cor mais suave, como cinza */
   opacity: 0.6;  /* Diminui um pouco a opacidade para dar um efeito visual de concluído */
-}
-
-/* Estilo para desabilitar os botões */
-button:disabled {
-  background-color: lightgray;  /* Muda a cor de fundo quando desabilitado */
-  color: darkgray;  /* Muda a cor do texto quando desabilitado */
-  cursor: not-allowed;  /* Muda o cursor para indicar que o botão não é clicável */
 }
 
 #back-to-notebook {

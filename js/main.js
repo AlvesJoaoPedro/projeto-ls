@@ -28,38 +28,59 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
 // Função para salvar tarefas no LocalStorage
-function saveTaskToLocalStorage(task) {
-  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-  tasks.push(task);
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+
+function saveTaskToLocalStorage(taskText) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  // Verifica se já existe uma tarefa com esse nome
+  let exists = tasks.some(task => typeof task === "object" && task.nome === taskText);
+  if (!exists) {
+      tasks.push({ nome: taskText, status: "active" });
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
 }
+
+
+function saveDeletedTaskToLocalStorage(taskText) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  tasks = tasks.map(task =>
+      task.nome === taskText ? { ...task, status: "deleted" } : task
+  );
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+
+function saveCompletedTaskToLocalStorage(taskText) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  tasks = tasks.map(task =>
+      task.nome === taskText ? { ...task, status: "completed" } : task
+  );
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
 
 // Função para carregar tarefas do LocalStorage
 function loadTasksFromLocalStorage() {
   let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-  tasks.forEach(task => {
-    createTaskElement(task);
-  });
+
+  let activeTasks = tasks.filter(task => task.status === "active");
+  let completedTasks = tasks.filter(task => task.status === "completed");
+  let deletedTasks = tasks.filter(task => task.status === "deleted")
+
+  console.log("Ativas: ", activeTasks);
+  console.log("Concluídas: ", completedTasks);
+  console.log("Removidas: ", deletedTasks);
 }
 
-function saveCompletedTaskToLocalStorage(task) {
-  let completedTasks = JSON.parse(localStorage.getItem('completed-tasks')) || [];
-  completedTasks.push(task);
-  localStorage.setItem('completed-tasks', JSON.stringify(completedTasks));
-}
-
-function saveDeletedTaskToLocalStorage(task) {
-  let deletedTasks = JSON.parse(localStorage.getItem('deleted-tasks')) || [];
-  deletedTasks.push(task);
-  localStorage.setItem('deleted-tasks', JSON.stringify(deletedTasks));
-}
-
-function loadCompletedTasksFromLocalStorage()
-{
-  let completedTasks = JSON.parse(localStorage.getItem('completed-tasks')) || [];
-
+function removeTaskFromLocalStorage(taskToRemove) {
+  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  tasks = tasks.filter(task => task.nome !== taskToRemove);
+  localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 // Função para criar e exibir um item da lista
@@ -68,55 +89,36 @@ function createTaskElement(taskText) {
   let listItem = document.createElement('li');
   listItem.textContent = taskText;
 
-  // Criação do contêiner para os botões
   let buttonContainer = document.createElement('div');
   buttonContainer.classList.add('button-container');
 
-  // Botão de exclusão
   let deleteButton = document.createElement('button');
   deleteButton.textContent = 'X';
   deleteButton.classList.add('delete-btn');
   deleteButton.addEventListener('click', () => {
-    taskList.removeChild(listItem);
-    removeTaskFromLocalStorage(taskText);
-    saveDeletedTaskToLocalStorage(taskText);
+      listItem.classList.add('deleted-tasks');
+      taskList.removeChild(listItem);
+      saveDeletedTaskToLocalStorage(taskText); // Atualiza status para "removida"
   });
 
-    // Botão de concluir
-    let completeButton = document.createElement('button');
-    completeButton.textContent = '✓';
-    completeButton.classList.add('complete-btn');
-    completeButton.addEventListener('click',
-      () =>
-      {
+  let completeButton = document.createElement('button');
+  completeButton.textContent = '✓';
+  completeButton.classList.add('complete-btn');
+  completeButton.addEventListener('click', () => {
       listItem.classList.add('completed-tasks');
-  
-      // Desabilita os botões
-      completeButton.disabled = true;
-      deleteButton.disabled = true;
-  
-      // Salva a tarefa como concluída no LocalStorage
-      saveCompletedTaskToLocalStorage(taskText);
-    });
+      taskList.removeChild(listItem);
+      saveCompletedTaskToLocalStorage(taskText); // Atualiza status para "concluída"
+  });
 
-  // Adiciona os botões ao contêiner
   buttonContainer.appendChild(deleteButton);
   buttonContainer.appendChild(completeButton);
-
-  // Adiciona o contêiner de botões ao item da lista
   listItem.appendChild(buttonContainer);
-
-  // Adiciona o item da lista à lista de tarefas
   taskList.appendChild(listItem);
+
+  saveTaskToLocalStorage(taskText); // Salva no localStorage como "ativa"
 }
 
 
-// Função para remover tarefas do LocalStorage
-function removeTaskFromLocalStorage(taskToRemove) {
-  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-  tasks = tasks.filter(task => task !== taskToRemove);
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-}
 
 // Função que altera a classe do container .notebook
 function toggleClass() {
@@ -137,19 +139,9 @@ function abrirCaderno() {
   window.location.href = 'cadernoaberto.html';
 }
 
-completedTasks = JSON.parse(localStorage.getItem('completed-tasks')) || []
-completeButton.addEventListener('click',
-  () =>
-  {
-    completedTasks.push(taskText);
-    listItem.classList.add('completed-tasks');
-
-    // Atualiza o LocalStorage com as tarefas concluídas
-    localStorage.setItem('completed-tasks', JSON.stringify(completedTasks))
-  })
-
-
 function goToNextPage()
 {
   window.location.href = 'completedtasks.html';
 }
+
+console.log(JSON.parse(localStorage.getItem('tasks')));

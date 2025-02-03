@@ -1,14 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Captura o elemento <ul> onde as tarefas concluídas serão exibidas
-    const completedTaskList = document.querySelector('#completed-tasks-list');
-  
-    // Obtém as tarefas concluídas do LocalStorage
-    const completedTasks = JSON.parse(localStorage.getItem('completed-tasks')) || [];
-  
-    // Adiciona cada tarefa como um <li> à lista
-    completedTasks.forEach(task => {
-      const listItem = document.createElement('li');
-      listItem.textContent = task; // Define o texto do item
-      completedTaskList.appendChild(listItem); // Adiciona o item à lista
-    });
+  let completedTaskList = document.querySelector('#completed-tasks-list');
+
+  let allTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+  let completedTasks = allTasks.filter(task => task.status === "completed");
+
+  if (completedTasks.length === 0) {
+      let emptyMessage = document.createElement('li');
+      emptyMessage.textContent = "Nenhuma tarefa foi concluída ainda.";
+      completedTaskList.appendChild(emptyMessage);
+      return;
+  }
+
+  completedTasks.forEach(task => {
+      let listItem = document.createElement('li');
+      listItem.textContent = task.nome;
+      completedTaskList.appendChild(listItem);
   });
+});
